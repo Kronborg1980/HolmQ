@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HolmQ Service ApS – Haveservice, vedligeholdelse og små reparationer i Hirtshals</title>
+<meta name="description" content="HolmQ Service ApS i Hirtshals: græsslåning, hækklipning, beskæring, stubfræsning, jordfræsning, ny græsplæne og små reparationer. Ring 60 80 43 73 for et uforpligtende tilbud.">
+<meta name="theme-color" content="#070906">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HolmQ Service ApS – Haveservice i Hirtshals og omegn">
+<meta property="og:description" content="Græsslåning, hækklipning, stubfræsning, ny græsplæne og små reparationer. Få et uforpligtende tilbud på 60 80 43 73.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="da_DK">
+<link rel="icon" href="assets/img/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/hero.jpg">
+<style>
+:root{
+  --bg:#070906;--bg2:#0d110b;--card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.07);--line:rgba(255,255,255,.09);
+  --text:#eef3ea;--muted:#a4ae9f;--dim:#6f7a6a;--g:#62bd2f;--g2:#86dc4f;--gdark:#2f6a14;
+  --r:20px;--max:1180px;--font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+svg{width:1.25em;height:1.25em;flex-shrink:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+.aurora{position:fixed;inset:-20vh -10vw auto;height:120vh;pointer-events:none;z-index:-1;
+  background:radial-gradient(40vw 30vh at 15% 10%,rgba(98,189,47,.16),transparent 70%),radial-gradient(35vw 30vh at 85% 30%,rgba(134,220,79,.08),transparent 70%),radial-gradient(50vw 40vh at 50% 100%,rgba(47,106,20,.12),transparent 70%);filter:blur(10px)}
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(7,9,6,.72);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-color:var(--line)}
+.nav{display:flex;align-items:center;gap:24px;height:72px}
+.brand img{height:44px;width:auto}
+.nav ul{display:flex;gap:4px;list-style:none;margin-left:auto}
+.nav ul a{padding:8px 14px;border-radius:99px;color:var(--muted);font-weight:500;font-size:.95rem;transition:.2s}
+.nav ul a:hover{color:var(--text);background:var(--card)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:99px;font-weight:700;font-size:1rem;transition:transform .15s,box-shadow .2s,background .2s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-g{background:linear-gradient(135deg,var(--g2),var(--g));color:#0a1405;box-shadow:0 8px 30px -8px rgba(98,189,47,.6)}
+.btn-g:hover{box-shadow:0 10px 40px -6px rgba(98,189,47,.8)}
+.btn-o{border:1px solid var(--line);background:var(--card);backdrop-filter:blur(10px)}
+.btn-o:hover{background:var(--card2)}
+.btn-sm{padding:10px 16px;font-size:.92rem}
+.menu-btn{display:none;margin-left:auto;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);align-items:center;justify-content:center}
+/* hero */
+.hero{position:relative;min-height:min(100svh,920px);display:flex;align-items:flex-end;padding:120px 0 64px;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;transform:scale(1.04);animation:zoom 18s ease-out forwards}
+@keyframes zoom{to{transform:scale(1)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,6,.55) 0%,rgba(7,9,6,.25) 35%,rgba(7,9,6,.85) 75%,var(--bg) 100%),linear-gradient(90deg,rgba(7,9,6,.85) 0%,rgba(7,9,6,.2) 70%)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:rgba(98,189,47,.12);border:1px solid rgba(98,189,47,.3);color:var(--g2);font-weight:600;font-size:.85rem;margin-bottom:20px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--g2);box-shadow:0 0 12px var(--g2);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+h1{font-size:clamp(2.2rem,6vw,4.4rem);line-height:1.05;letter-spacing:-.035em;font-weight:800;max-width:15ch}
+h1 em{font-style:normal;background:linear-gradient(120deg,var(--g2),var(--g));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(1.05rem,2vw,1.25rem);color:#cfd8ca;max-width:56ch;margin:20px 0 32px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:36px;color:var(--muted);font-size:.92rem}
+.trust span{display:inline-flex;align-items:center;gap:8px}.trust svg{color:var(--g2)}
+/* sections */
+section{padding:96px 0;position:relative}
+.sh{max-width:680px;margin-bottom:48px}
+.kicker{color:var(--g2);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;margin-bottom:12px;display:block}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.03em;font-weight:800}
+.sh p{color:var(--muted);margin-top:14px;font-size:1.08rem}
+.glass{background:var(--card);border:1px solid var(--line);border-radius:var(--r);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+/* services */
+.svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.svc .glass{padding:26px;transition:transform .25s,border-color .25s,background .25s;position:relative;overflow:hidden}
+.svc .glass:hover{transform:translateY(-4px);border-color:rgba(98,189,47,.35);background:var(--card2)}
+.svc .ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(134,220,79,.2),rgba(47,106,20,.15));border:1px solid rgba(98,189,47,.3);color:var(--g2);margin-bottom:18px}
+.svc .ic svg{width:26px;height:26px}
+.svc h3{font-size:1.12rem;margin-bottom:6px;letter-spacing:-.01em}
+.svc p{color:var(--muted);font-size:.95rem}
+.badge{position:absolute;top:18px;right:18px;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:99px;background:var(--g);color:#0a1405;text-transform:uppercase;letter-spacing:.05em}
+/* before / after */
+.ba{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:#111;user-select:none;touch-action:pan-y;border:1px solid var(--line)}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba .after{clip-path:inset(0 0 0 var(--p,50%))}
+.ba .handle{position:absolute;top:0;bottom:0;left:var(--p,50%);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.5);pointer-events:none}
+.ba .handle::after{content:"";position:absolute;top:50%;left:50%;width:46px;height:46px;transform:translate(-50%,-50%);border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m9 6-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E") center/22px no-repeat;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba .lbl{position:absolute;top:14px;padding:5px 12px;border-radius:99px;font-weight:700;font-size:.8rem;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);pointer-events:none}
+.ba .lbl.l{left:14px}.ba .lbl.r{right:14px;background:var(--g);color:#0a1405}
+.feature{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center}
+.feature h3{font-size:1.6rem;letter-spacing:-.02em;margin-bottom:12px}
+.feature p{color:var(--muted)}
+/* projects */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:600;font-size:.9rem;transition:.2s}
+.chip:hover{color:var(--text)}
+.chip.on{background:var(--g);color:#0a1405;border-color:var(--g)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.pc{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;background:#111;border:1px solid var(--line);text-align:left;width:100%}
+.pc img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.pc:hover img{transform:scale(1.06)}
+.pc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.85))}
+.pc .meta{position:absolute;left:0;right:0;bottom:0;padding:20px;z-index:1}
+.pc .cat{font-size:.75rem;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.08em}
+.pc h3{font-size:1.15rem;line-height:1.25;margin-top:4px}
+.pc .tags{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;z-index:1}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);font-size:.78rem;font-weight:600}
+.pill.g{background:var(--g);color:#0a1405}
+.pill svg{width:14px;height:14px}
+.empty{color:var(--muted);padding:40px;text-align:center}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.steps .glass{padding:26px;position:relative}
+.steps .glass::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-size:2.4rem;font-weight:800;letter-spacing:-.04em;background:linear-gradient(180deg,var(--g2),rgba(98,189,47,.15));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:10px}
+.steps h3{font-size:1.08rem;margin-bottom:6px}.steps p{color:var(--muted);font-size:.94rem}
+/* about */
+.about{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.about .ph{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line)}
+.about .ph img{width:100%;height:100%;object-fit:cover}
+.about .ph .stamp{position:absolute;left:16px;bottom:16px;right:16px;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.about .ph .stamp svg{color:var(--g2);width:28px;height:28px}
+.about .txt p{color:#c6cfc1;margin-top:16px;font-size:1.05rem;white-space:pre-line}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
+.facts .glass{padding:16px 18px;display:flex;gap:12px;align-items:center;font-weight:600;font-size:.95rem}
+.facts svg{color:var(--g2)}
+.facts small{display:block;color:var(--dim);font-weight:500;font-size:.8rem}
+/* area */
+.area{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+.area .glass{padding:32px}
+.towns{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.towns span{padding:8px 14px;border-radius:99px;background:var(--card2);border:1px solid var(--line);font-weight:600;font-size:.9rem}
+.towns span:first-child{background:rgba(98,189,47,.15);border-color:rgba(98,189,47,.4);color:var(--g2)}
+.map{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);min-height:300px;background:#111}
+.map iframe{width:100%;height:100%;min-height:300px;border:0;filter:invert(.9) hue-rotate(180deg) saturate(.6) brightness(.95)}
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.revs .glass{padding:26px}
+.stars{display:flex;gap:2px;color:#f5c542;margin-bottom:12px}.stars svg{width:18px;height:18px}
+.revs p{color:#d3dbce}.revs b{display:block;margin-top:14px;font-size:.92rem}
+/* faq */
+.faq{max-width:800px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 0;font-weight:700;font-size:1.08rem;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.6rem;font-weight:400;color:var(--g2);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);padding:0 0 22px;max-width:65ch}
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:start}
+.cinfo{padding:32px;position:sticky;top:96px}
+.cinfo h3{font-size:1.4rem;margin-bottom:6px}
+.cinfo>p{color:var(--muted);margin-bottom:22px}
+.cl{display:flex;align-items:center;gap:14px;padding:14px;border-radius:14px;transition:background .2s;margin:0 -14px}
+a.cl:hover{background:var(--card2)}
+.cl .ci{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(98,189,47,.13);color:var(--g2)}
+.cl small{display:block;color:var(--dim);font-size:.8rem}.cl b{font-size:1.02rem}
+form.glass{padding:32px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-weight:600;font-size:.88rem;margin:0 0 7px;color:#d6ded1}
+.f{margin-bottom:16px}
+input,textarea,select{width:100%;font:inherit;color:var(--text);background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:12px;padding:13px 14px;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--g);box-shadow:0 0 0 4px rgba(98,189,47,.15)}
+textarea{min-height:120px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{margin:0}
+.chips input{position:absolute;opacity:0;pointer-events:none;width:1px}
+.chips span{display:inline-block;padding:9px 14px;border-radius:99px;border:1px solid var(--line);background:rgba(0,0,0,.25);font-weight:600;font-size:.88rem;cursor:pointer;color:var(--muted);transition:.15s}
+.chips input:checked+span{background:rgba(98,189,47,.18);border-color:var(--g);color:var(--g2)}
+.chips input:focus-visible+span{box-shadow:0 0 0 3px rgba(98,189,47,.3)}
+.hp{position:absolute;left:-9999px}
+.fnote{color:var(--dim);font-size:.82rem;margin-top:12px}
+.ok{display:none;text-align:center;padding:30px 10px}
+.ok .ci{width:64px;height:64px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;background:var(--g);color:#0a1405}
+.ok .ci svg{width:32px;height:32px}
+/* footer */
+footer{border-top:1px solid var(--line);padding:48px 0 120px;color:var(--muted);font-size:.92rem}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot img{height:40px;width:auto}
+.foot a:hover{color:var(--text)}
+.foot .links{display:flex;gap:18px;flex-wrap:wrap}
+.copy{margin-top:24px;color:var(--dim);font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+/* mobile bar */
+.mbar{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:60;display:none;gap:8px;padding:8px;border-radius:22px;background:rgba(13,17,11,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);box-shadow:0 10px 40px rgba(0,0,0,.5);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.mbar.show{transform:none}
+.mbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px;border-radius:15px;font-size:.78rem;font-weight:700}
+.mbar a.p{background:linear-gradient(135deg,var(--g2),var(--g));color:#0a1405;flex:1.4;flex-direction:row;justify-content:center;font-size:.95rem;gap:8px}
+/* dialog */
+dialog{border:0;padding:0;background:transparent;color:var(--text);max-width:none;max-height:none;width:100%;height:100%}
+dialog::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
+.pd{max-width:1000px;margin:4vh auto;background:var(--bg2);border:1px solid var(--line);border-radius:24px;overflow:hidden;max-height:92vh;display:flex;flex-direction:column}
+.pd-top{display:flex;justify-content:space-between;align-items:start;gap:16px;padding:22px 24px 0}
+.pd-top h3{font-size:1.5rem;letter-spacing:-.02em;line-height:1.2}
+.xbtn{width:44px;height:44px;border-radius:50%;background:var(--card2);display:grid;place-items:center;flex-shrink:0}
+.pd-body{overflow:auto;padding:18px 24px 28px}
+.pd-body>p{color:var(--muted);margin:4px 0 20px;max-width:70ch}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin}
+.car figure{flex:0 0 min(85%,560px);scroll-snap-align:start;border-radius:16px;overflow:hidden;background:#111;aspect-ratio:4/3;position:relative}
+.car img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.car figcaption{position:absolute;top:10px;left:10px}
+.zoom{display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:20px}
+.zoom img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px}
+.zoom .xbtn{position:fixed;top:16px;right:16px}
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.hero-bg img{animation:none}html{scroll-behavior:auto}}
+@media (max-width:960px){
+  .feature,.about,.area,.contact{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .cinfo{position:static}
+  .about .ph{aspect-ratio:4/3}
+}
+@media (max-width:760px){
+  .nav ul,.nav .btn{display:none}
+  .menu-btn{display:flex}
+  .nav.open ul{display:flex;position:absolute;top:72px;left:12px;right:12px;flex-direction:column;padding:10px;background:rgba(13,17,11,.96);border:1px solid var(--line);border-radius:18px}
+  .nav.open ul a{display:block;padding:14px 16px;font-size:1.05rem}
+  section{padding:72px 0}
+  .hero{padding-bottom:40px}
+  .row,.facts{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .mbar{display:flex}
+  form.glass,.cinfo,.area .glass{padding:22px}
+  .pd{margin:0;border-radius:0;max-height:100%;height:100%;border:0}
+  .grid{grid-template-columns:1fr 1fr;gap:10px}
+  .pc{aspect-ratio:3/4}.pc .meta{padding:12px}.pc h3{font-size:.95rem}.pc .tags{top:8px;left:8px;right:8px}.pill{font-size:.7rem;padding:4px 8px}
+}
+</style>
+</head>
+<body>
+<div class="aurora"></div>
+
+<header id="hdr">
+  <nav class="wrap nav" id="nav">
+    <a href="#top" class="brand" aria-label="HolmQ Service ApS – forside"><img src="assets/img/logo.webp" alt="HolmQ Service ApS" width="160" height="55"></a>
+    <ul>
+      <li><a href="#ydelser">Ydelser</a></li>
+      <li><a href="#projekter">Projekter</a></li>
+      <li><a href="#om">Om</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <a class="btn btn-g btn-sm" data-tel href="#"><span data-ic="phone"></span><span data-phone></span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-bg"><img src="assets/img/hero.jpg" alt="HolmQ Service bil og havemaskiner ved en indkørsel" fetchpriority="high"></div>
+    <div class="wrap">
+      <span class="eyebrow"><i></i><span data-c="tagline"></span></span>
+      <h1 id="heroTitle"></h1>
+      <p class="lead" data-c="heroText"></p>
+      <div class="cta">
+        <a class="btn btn-g" href="#kontakt">Få et uforpligtende tilbud <span data-ic="arrow"></span></a>
+        <a class="btn btn-o" data-tel href="#"><span data-ic="phone"></span> Ring <span data-phone></span></a>
+      </div>
+      <div class="trust">
+        <span><span data-ic="check"></span>Uforpligtende tilbud</span>
+        <span><span data-ic="pin"></span>Lokal i <span data-c="city"></span></span>
+        <span><span data-ic="shield"></span>CVR <span data-c="cvr"></span></span>
+        <span><span data-ic="leaf"></span><span data-c="promise"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="ydelser">
+    <div class="wrap">
+      <div class="sh rv"><span class="kicker">Ydelser</span><h2>Hjælp til haven og huset – stort som småt</h2><p>Jeg har det professionelle udstyr med og rydder op efter mig.</p></div>
+      <div class="svc" id="services"></div>
+    </div>
+  </section>
+
+  <section id="foerefter" hidden>
+    <div class="wrap feature">
+      <div class="rv" id="featBA"></div>
+      <div class="rv">
+        <span class="kicker">Før &amp; efter</span>
+        <h3 id="featTitle"></h3>
+        <p id="featText"></p>
+        <p style="margin-top:14px;color:var(--dim);font-size:.9rem">Træk i håndtaget for at se forskellen.</p>
+        <a class="btn btn-o" style="margin-top:22px" href="#projekter">Se flere projekter <span data-ic="arrow"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="projekter">
+    <div class="wrap">
+      <div class="sh rv"><span class="kicker">Projekter</span><h2>Udvalgte opgaver</h2><p>Et udpluk af de seneste opgaver. Tryk på et projekt for at se flere billeder.</p></div>
+      <div class="filters rv" id="filters"></div>
+      <div class="grid" id="projects"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sh rv"><span class="kicker">Sådan foregår det</span><h2>Nemt fra start til slut</h2></div>
+      <div class="steps">
+        <div class="glass rv"><h3>Kontakt</h3><p>Ring, send en SMS eller udfyld formularen og fortæl kort om opgaven.</p></div>
+        <div class="glass rv"><h3>Tilbud</h3><p>Jeg kigger på opgaven og giver dig et klart, uforpligtende tilbud.</p></div>
+        <div class="glass rv"><h3>Udførelse</h3><p>Arbejdet bliver udført grundigt og til aftalt tid – med eget udstyr.</p></div>
+        <div class="glass rv"><h3>Nyd resultatet</h3><p>Jeg rydder op efter mig, så du bare kan nyde haven.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="om">
+    <div class="wrap about">
+      <div class="ph rv"><img src="assets/img/jordfraesning.jpg" alt="Jordfræsning med traktor" loading="lazy">
+        <div class="stamp glass"><span data-ic="leaf"></span><div><b data-c="promise"></b></div></div></div>
+      <div class="txt rv">
+        <span class="kicker">Om HolmQ</span>
+        <h2 data-c="aboutTitle"></h2>
+        <p data-c="aboutText"></p>
+        <div class="facts">
+          <div class="glass"><span data-ic="pin"></span><div><small>Base</small><span data-c="zip"></span> <span data-c="city"></span></div></div>
+          <div class="glass"><span data-ic="doc"></span><div><small>CVR-nr.</small><span data-c="cvr"></span></div></div>
+          <div class="glass"><span data-ic="clock"></span><div><small>Tilgængelighed</small>Altid åben for henvendelser</div></div>
+          <div class="glass"><span data-ic="check"></span><div><small>Tilbud</small>Altid uforpligtende</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="omraade" style="padding-top:24px">
+    <div class="wrap area">
+      <div class="glass rv">
+        <span class="kicker">Område</span>
+        <h2 style="font-size:clamp(1.5rem,3vw,2rem)">Her kører jeg</h2>
+        <p style="color:var(--muted);margin-top:12px" data-c="areaText"></p>
+        <div class="towns" id="towns"></div>
+      </div>
+      <div class="map rv" id="map"></div>
+    </div>
+  </section>
+
+  <section id="anmeldelser" hidden>
+    <div class="wrap">
+      <div class="sh rv"><span class="kicker">Anmeldelser</span><h2>Det siger kunderne</h2></div>
+      <div class="revs" id="reviews"></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sh rv"><span class="kicker">FAQ</span><h2>Ofte stillede spørgsmål</h2></div>
+      <div class="faq rv" id="faqList"></div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="wrap">
+      <div class="sh rv"><span class="kicker">Kontakt</span><h2>Få et uforpligtende tilbud</h2><p>Fortæl kort om opgaven, så vender jeg tilbage hurtigst muligt.</p></div>
+      <div class="contact">
+        <div class="glass cinfo rv">
+          <h3 data-c="company"></h3>
+          <p data-c="hours"></p>
+          <a class="cl" data-tel href="#"><span class="ci" data-ic="phone"></span><div><small>Ring</small><b data-phone></b></div></a>
+          <a class="cl" data-sms href="#"><span class="ci" data-ic="sms"></span><div><small>Send en SMS</small><b data-phone></b></div></a>
+          <a class="cl" id="mailLink" href="#" hidden><span class="ci" data-ic="mail"></span><div><small>E-mail</small><b data-c="email"></b></div></a>
+          <a class="cl" id="fbLink" href="#" target="_blank" rel="noopener" hidden><span class="ci" data-ic="fb"></span><div><small>Facebook</small><b>Følg HolmQ på Facebook</b></div></a>
+          <div class="cl"><span class="ci" data-ic="pin"></span><div><small>Adresse</small><b><span data-c="zip"></span> <span data-c="city"></span></b></div></div>
+        </div>
+        <form class="glass rv" id="form" novalidate>
+          <div id="formFields">
+            <div class="row">
+              <div class="f"><label for="fName">Navn *</label><input id="fName" name="name" autocomplete="name" required maxlength="100"></div>
+              <div class="f"><label for="fPhone">Telefon *</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" required maxlength="30" inputmode="tel"></div>
+            </div>
+            <div class="row">
+              <div class="f"><label for="fEmail">E-mail</label><input id="fEmail" name="email" type="email" autocomplete="email" maxlength="120"></div>
+              <div class="f"><label for="fAddr">Adresse / by</label><input id="fAddr" name="address" autocomplete="street-address" maxlength="150"></div>
+            </div>
+            <div class="f"><label>Hvad kan jeg hjælpe med?</label><div class="chips" id="fServices"></div></div>
+            <div class="f"><label for="fMsg">Beskriv opgaven *</label><textarea id="fMsg" name="message" required maxlength="3000" placeholder="Fx: Hæk på ca. 20 meter skal klippes, og to træstubbe skal fræses væk."></textarea></div>
+            <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn btn-g" style="width:100%" id="fSubmit" type="submit">Send forespørgsel <span data-ic="arrow"></span></button>
+            <p class="fnote">Dine oplysninger bruges kun til at besvare din henvendelse.</p>
+            <p class="fnote" id="fErr" style="color:#ff8a7a" hidden></p>
+          </div>
+          <div class="ok" id="formOk"><div class="ci" data-ic="check"></div><h3>Tak for din henvendelse!</h3><p style="color:var(--muted);margin-top:8px">Jeg vender tilbage hurtigst muligt. Haster det, så ring på <a data-tel href="#" style="color:var(--g2)"><span data-phone></span></a>.</p></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <img src="assets/img/logo.webp" alt="HolmQ Service ApS" width="117" height="40" loading="lazy">
+      <div class="links"><a href="#ydelser">Ydelser</a><a href="#projekter">Projekter</a><a href="#kontakt">Kontakt</a><a data-tel href="#"><span data-phone></span></a></div>
+    </div>
+    <div class="copy"><span>© <span id="yr"></span> <span data-c="company"></span> · CVR <span data-c="cvr"></span> · <span data-c="zip"></span> <span data-c="city"></span></span><a href="admin.html" rel="nofollow">Admin</a></div>
+  </div>
+</footer>
+
+<nav class="mbar" id="mbar" aria-label="Hurtig kontakt">
+  <a data-tel href="#"><span data-ic="phone"></span>Ring</a>
+  <a data-sms href="#"><span data-ic="sms"></span>SMS</a>
+  <a class="p" href="#kontakt">Få tilbud <span data-ic="arrow"></span></a>
+</nav>
+
+<dialog id="pdlg" aria-label="Projekt"></dialog>
+<dialog id="zdlg" aria-label="Billede"></dialog>
+
+<script src="config.js"></script>
+<script src="content.js"></script>
+<script type="module">
+import { ICONS, esc, fmtPhone, telHref, loadSite, photoUrl, thumbUrl } from "./assets/shared.js";
+
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const icons = (root = document) => $$("[data-ic]", root).forEach((e) => { if (!e.firstElementChild) e.innerHTML = ICONS[e.dataset.ic] || ""; });
+let C, PROJECTS;
+
+function render(data) {
+  C = data.content; PROJECTS = data.projects;
+  $$("[data-c]").forEach((e) => (e.textContent = C[e.dataset.c] ?? ""));
+  $$("[data-phone]").forEach((e) => (e.textContent = fmtPhone(C.phone)));
+  $$("[data-tel]").forEach((e) => (e.href = telHref(C.phone)));
+  $$("[data-sms]").forEach((e) => (e.href = "sms:+45" + String(C.phone).replace(/\D/g, "")));
+  // hero titel: fremhæv sidste del efter "i"
+  const t = C.heroTitle || "", m = t.match(/^(.*?\s(?:i|til)\s)(.*)$/);
+  $("#heroTitle").innerHTML = m ? `${esc(m[1])}<em>${esc(m[2])}</em>` : esc(t);
+  if (C.email) { const a = $("#mailLink"); a.hidden = false; a.href = "mailto:" + C.email; }
+  if (C.facebook) { const a = $("#fbLink"); a.hidden = false; a.href = C.facebook; }
+
+  $("#services").innerHTML = (C.services || []).map((s) => `
+    <article class="glass rv">${s.badge ? `<span class="badge">${esc(s.badge)}</span>` : ""}
+      <div class="ic">${ICONS[s.icon] || ICONS.leaf}</div><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></article>`).join("");
+
+  $("#fServices").innerHTML = (C.services || []).map((s) => `<label><input type="checkbox" name="services" value="${esc(s.title)}"><span>${esc(s.title)}</span></label>`).join("")
+    + `<label><input type="checkbox" name="services" value="Andet"><span>Andet</span></label>`;
+
+  $("#towns").innerHTML = (C.areas || []).map((a) => `<span>${esc(a)}</span>`).join("");
+  $("#faqList").innerHTML = (C.faq || []).map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
+
+  const revs = (C.reviews || []).filter((r) => r.text);
+  $("#anmeldelser").hidden = !revs.length;
+  $("#reviews").innerHTML = revs.map((r) => `<div class="glass rv"><div class="stars">${ICONS.star.repeat(Math.max(1, Math.min(5, +r.stars || 5)))}</div><p>“${esc(r.text)}”</p><b>${esc(r.name)}</b></div>`).join("");
+
+  renderFeature(); renderFilters(); renderProjects("Alle"); jsonLd(); icons(); reveal();
+}
+
+function baHTML(before, after) {
+  return `<div class="ba" style="--p:50%"><img src="${esc(before)}" alt="Før"><img class="after" src="${esc(after)}" alt="Efter">
+    <span class="lbl l">Før</span><span class="lbl r">Efter</span><div class="handle"></div>
+    <input type="range" min="0" max="100" value="50" aria-label="Sammenlign før og efter"></div>`;
+}
+function bindBA(root) {
+  $$(".ba input", root).forEach((inp) => inp.addEventListener("input", () => inp.parentElement.style.setProperty("--p", inp.value + "%")));
+}
+const pair = (p) => ({ b: (p.photos || []).find((x) => x.tag === "before"), a: (p.photos || []).find((x) => x.tag === "after") });
+
+async function renderFeature() {
+  const p = PROJECTS.find((p) => { const x = pair(p); return x.b && x.a; });
+  if (!p) return;
+  const { b, a } = pair(p);
+  $("#foerefter").hidden = false;
+  $("#featTitle").textContent = p.title; $("#featText").textContent = p.description || "";
+  $("#featBA").innerHTML = baHTML(thumbUrl(b), thumbUrl(a)); bindBA($("#featBA"));
+  const [bu, au] = await Promise.all([photoUrl(b), photoUrl(a)]);
+  const imgs = $$("#featBA img"); imgs[0].src = bu; imgs[1].src = au;
+}
+
+function renderFilters() {
+  const cats = ["Alle", ...new Set(PROJECTS.map((p) => p.category).filter(Boolean))];
+  $("#filters").innerHTML = cats.length > 2 ? cats.map((c, i) => `<button class="chip${i ? "" : " on"}" data-cat="${esc(c)}">${esc(c)}</button>`).join("") : "";
+  $("#filters").onclick = (e) => { const b = e.target.closest(".chip"); if (!b) return; $$(".chip").forEach((x) => x.classList.toggle("on", x === b)); renderProjects(b.dataset.cat); };
+}
+function renderProjects(cat) {
+  const list = PROJECTS.filter((p) => cat === "Alle" || p.category === cat);
+  $("#projects").innerHTML = list.length ? list.map((p) => {
+    const ph = (p.photos || [])[0]; const x = pair(p); const n = (p.photos || []).length;
+    return `<button class="pc rv in" data-id="${esc(p.id)}" aria-label="Se projektet ${esc(p.title)}">
+      ${ph ? `<img src="${esc(thumbUrl(ph))}" alt="${esc(p.title)}" loading="lazy">` : ""}
+      <div class="tags">${x.b && x.a ? `<span class="pill g">Før &amp; efter</span>` : "<span></span>"}${n > 1 ? `<span class="pill">${ICONS.images}${n}</span>` : ""}</div>
+      <div class="meta"><div class="cat">${esc(p.category || "")}</div><h3>${esc(p.title)}</h3></div></button>`;
+  }).join("") : `<p class="empty">Ingen projekter i denne kategori endnu.</p>`;
+}
+$("#projects").addEventListener("click", (e) => { const b = e.target.closest(".pc"); if (b) openProject(b.dataset.id); });
+
+async function openProject(id) {
+  const p = PROJECTS.find((x) => x.id === id); if (!p) return;
+  const d = $("#pdlg"), x = pair(p);
+  const rest = (p.photos || []);
+  d.innerHTML = `<div class="pd"><div class="pd-top"><div><div class="kicker" style="margin:0 0 4px">${esc(p.category || "")}${p.location ? " · " + esc(p.location) : ""}</div><h3>${esc(p.title)}</h3></div>
+    <button class="xbtn" data-close aria-label="Luk">${ICONS.x}</button></div>
+    <div class="pd-body">${p.description ? `<p>${esc(p.description)}</p>` : ""}
+      ${x.b && x.a ? `<div style="margin-bottom:16px" id="pdBA">${baHTML(thumbUrl(x.b), thumbUrl(x.a))}</div>` : ""}
+      <div class="car">${rest.map((ph, i) => `<figure>${ph.tag ? `<figcaption><span class="pill ${ph.tag === "after" ? "g" : ""}">${ph.tag === "after" ? "Efter" : "Før"}</span></figcaption>` : ""}<img data-i="${i}" src="${esc(thumbUrl(ph))}" alt="${esc(p.title)} – billede ${i + 1}" loading="lazy"></figure>`).join("")}</div>
+      <a class="btn btn-g" href="#kontakt" data-close style="margin-top:22px">Få et tilbud på en lignende opgave ${ICONS.arrow}</a>
+    </div></div>`;
+  bindBA(d); d.showModal(); document.body.style.overflow = "hidden";
+  // indlæs fulde billeder
+  $$(".car img", d).forEach(async (img) => { img.src = await photoUrl(rest[+img.dataset.i]); });
+  if (x.b && x.a) { const imgs = $$("#pdBA img", d); photoUrl(x.b).then((u) => (imgs[0].src = u)); photoUrl(x.a).then((u) => (imgs[1].src = u)); }
+}
+$("#pdlg").addEventListener("click", (e) => {
+  if (e.target.closest("[data-close]") || e.target === e.currentTarget) { $("#pdlg").close(); }
+  const img = e.target.closest(".car img"); if (img) zoom(img.src, img.alt);
+});
+$("#pdlg").addEventListener("close", () => (document.body.style.overflow = ""));
+function zoom(src, alt) {
+  const z = $("#zdlg"); z.innerHTML = `<div class="zoom"><img src="${esc(src)}" alt="${esc(alt)}"><button class="xbtn" aria-label="Luk">${ICONS.x}</button></div>`;
+  z.onclick = () => z.close(); z.showModal();
+}
+
+function jsonLd() {
+  document.getElementById("ld")?.remove();
+  const s = document.createElement("script"); s.type = "application/ld+json"; s.id = "ld";
+  s.textContent = JSON.stringify({
+    "@context": "https://schema.org", "@type": "LocalBusiness", name: C.company, description: C.heroText,
+    telephone: "+45" + String(C.phone).replace(/\D/g, ""), email: C.email || undefined, image: new URL("assets/img/og.jpg", location.href).href,
+    logo: new URL("assets/img/logo.png", location.href).href, url: location.origin + location.pathname,
+    address: { "@type": "PostalAddress", addressLocality: C.city, postalCode: C.zip, addressCountry: "DK" },
+    areaServed: (C.areas || []).map((a) => ({ "@type": "City", name: a })), taxID: "DK" + C.cvr,
+    openingHoursSpecification: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], opens: "00:00", closes: "23:59" },
+    sameAs: C.facebook ? [C.facebook] : undefined,
+    makesOffer: (C.services || []).map((x) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: x.title } }))
+  });
+  document.head.appendChild(s);
+}
+
+// kort indlæses først når det er tæt på skærmen
+const mapObs = new IntersectionObserver((es) => { if (es[0].isIntersecting) { mapObs.disconnect();
+  $("#map").innerHTML = `<iframe title="Kort over ${esc(C.city)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${encodeURIComponent(C.zip + " " + C.city + ", Danmark")}&z=11&output=embed"></iframe>`; } }, { rootMargin: "300px" });
+mapObs.observe($("#map"));
+
+let rvObs;
+function reveal() {
+  rvObs ??= new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); rvObs.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  $$(".rv:not(.in)").forEach((e) => rvObs.observe(e));
+}
+
+// header + mobilbar
+const hdr = $("#hdr"), mbar = $("#mbar");
+const onScroll = () => { hdr.classList.toggle("scrolled", scrollY > 20); mbar.classList.toggle("show", scrollY > innerHeight * 0.6); };
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
+$("#menuBtn").onclick = () => { const o = $("#nav").classList.toggle("open"); $("#menuBtn").setAttribute("aria-expanded", o); };
+$$("#nav ul a").forEach((a) => a.addEventListener("click", () => $("#nav").classList.remove("open")));
+$("#yr").textContent = new Date().getFullYear();
+
+// kontaktformular
+$("#form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = e.target, err = $("#fErr"), btn = $("#fSubmit");
+  if (f.website.value) return; // spam
+  const data = { name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(), address: f.address.value.trim(),
+    services: $$("input[name=services]:checked", f).map((x) => x.value), message: f.message.value.trim() };
+  if (!data.name || !data.phone || !data.message) { err.hidden = false; err.textContent = "Udfyld venligst navn, telefon og en kort beskrivelse."; return; }
+  err.hidden = true; btn.disabled = true; btn.style.opacity = .6; btn.firstChild.textContent = "Sender… ";
+  let sent = false;
+  try {
+    const { getFirebase } = await import("./assets/shared.js");
+    const fb = await getFirebase();
+    if (fb) { await fb.fs.addDoc(fb.fs.collection(fb.db, "inquiries"), { ...data, status: "new", createdAt: fb.fs.serverTimestamp() }); sent = true; }
+  } catch (x) { console.warn(x); }
+  if (C.formEmail) {
+    try {
+      const r = await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(C.formEmail), { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ _subject: "Ny forespørgsel fra hjemmesiden – " + data.name, _template: "table", _captcha: "false", Navn: data.name, Telefon: data.phone, Email: data.email || "-", Adresse: data.address || "-", Ydelser: data.services.join(", ") || "-", Besked: data.message }) });
+      if (r.ok) sent = true;
+    } catch (x) { console.warn(x); }
+  }
+  if (!sent) { // fallback: åbn SMS/mail med beskeden udfyldt
+    const body = `Hej, jeg hedder ${data.name} (${data.phone}).\n${data.services.length ? "Ydelser: " + data.services.join(", ") + "\n" : ""}${data.address ? "Adresse: " + data.address + "\n" : ""}\n${data.message}`;
+    location.href = C.email ? `mailto:${C.email}?subject=${encodeURIComponent("Forespørgsel fra hjemmesiden")}&body=${encodeURIComponent(body)}`
+      : `sms:+45${String(C.phone).replace(/\D/g, "")}?body=${encodeURIComponent(body)}`;
+  }
+  $("#formFields").style.display = "none"; $("#formOk").style.display = "block"; icons($("#formOk"));
+});
+
+icons();
+if (window.HOLMQ_FIREBASE) render({ content: structuredClone(window.HOLMQ_DEFAULTS.content), projects: [] }); // vis tekst med det samme
+render(await loadSite());
+</script>
+</body>
+</html>

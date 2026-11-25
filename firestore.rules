@@ -1,0 +1,53 @@
+rules_version = '2';
+// HolmQ Service ApS – Firestore-regler
+// Kopiér hele filen ind i Firebase Console → Firestore Database → Regler → Udgiv.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Admin = bruger med et dokument i /admins/{uid} (oprettes manuelt i konsollen)
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    function str(v, max) { return v is string && v.size() <= max; }
+
+    // Admin-listen: man kan kun se om man selv er admin. Ingen kan skrive via appen.
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Tekster og kontaktinfo
+    match /site/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Projekter: offentlige kan læses af alle, kladder kun af admin
+    match /projects/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Billeder (gemmes komprimeret i Firestore – kræver ikke betalt Storage)
+    match /images/{id} {
+      allow get: if true;
+      allow list: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Kontaktformular: alle må oprette (med validering), kun admin må læse
+    match /inquiries/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name','phone','email','address','services','message','status','createdAt'])
+        && str(request.resource.data.name, 100) && request.resource.data.name.size() > 0
+        && str(request.resource.data.phone, 30) && request.resource.data.phone.size() > 0
+        && str(request.resource.data.email, 120)
+        && str(request.resource.data.address, 150)
+        && str(request.resource.data.message, 3000) && request.resource.data.message.size() > 0
+        && request.resource.data.services is list && request.resource.data.services.size() <= 20
+        && request.resource.data.status == 'new'
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

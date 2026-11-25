@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>HolmQ Admin</title>
+<meta name="theme-color" content="#070906">
+<link rel="manifest" href="admin.webmanifest">
+<link rel="icon" href="assets/img/icon-32.png">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HolmQ Admin">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070906;--bg2:#0e130c;--card:rgba(255,255,255,.05);--card2:rgba(255,255,255,.08);--line:rgba(255,255,255,.1);--text:#eef3ea;--muted:#a4ae9f;--dim:#6f7a6a;--g:#62bd2f;--g2:#86dc4f;--red:#ff6b5b;--font:"Plus Jakarta Sans",system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100svh;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(60vw 40vh at 0% 0%,rgba(98,189,47,.12),transparent 70%)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+svg{width:1.25em;height:1.25em;flex-shrink:0}
+img{display:block;max-width:100%}
+.screen{display:none;min-height:100svh}.screen.on{display:block}
+.center{display:flex;align-items:center;justify-content:center;padding:24px;min-height:100svh}
+.box{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;backdrop-filter:blur(12px)}
+.box img.logo{height:54px;width:auto;margin-bottom:20px}
+h1{font-size:1.5rem;letter-spacing:-.02em;margin-bottom:6px}
+h2{font-size:1.25rem;letter-spacing:-.02em}
+.muted{color:var(--muted)}.dim{color:var(--dim);font-size:.85rem}
+label{display:block;font-weight:600;font-size:.86rem;margin:14px 0 6px;color:#d6ded1}
+input,textarea,select{width:100%;font:inherit;font-size:16px;color:var(--text);background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--g);box-shadow:0 0 0 4px rgba(98,189,47,.15)}
+textarea{min-height:110px;resize:vertical}
+.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:14px;font-weight:700;transition:transform .12s,opacity .2s}
+.btn:active{transform:scale(.97)}.btn:disabled{opacity:.5}
+.btn-g{background:linear-gradient(135deg,var(--g2),var(--g));color:#0a1405}
+.btn-o{background:var(--card2);border:1px solid var(--line)}
+.btn-r{background:rgba(255,107,91,.12);color:var(--red);border:1px solid rgba(255,107,91,.3)}
+.btn-w{width:100%}
+.err{color:var(--red);font-size:.9rem;margin-top:10px;min-height:1.2em}
+/* app */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:rgba(7,9,6,.8);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.top img{height:34px;width:auto}
+.top .sp{flex:1}
+.top a{font-size:.85rem;font-weight:600;color:var(--muted);text-decoration:none;display:flex;gap:6px;align-items:center;padding:8px 12px;border-radius:10px;background:var(--card)}
+main{max-width:760px;margin:0 auto;padding:20px 16px 120px}
+.view{display:none}.view.on{display:block}
+.vh{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:space-around;background:rgba(13,17,11,.92);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:6px 6px max(6px,env(safe-area-inset-bottom))}
+.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:14px;font-size:.74rem;font-weight:700;color:var(--dim);position:relative;max-width:140px}
+.tabs button svg{width:24px;height:24px}
+.tabs button.on{color:var(--g2);background:rgba(98,189,47,.1)}
+.dot{position:absolute;top:4px;left:calc(50% + 6px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--red);color:#fff;font-size:.68rem;display:grid;place-items:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px}
+.plist{display:flex;flex-direction:column;gap:10px}
+.pi{display:flex;align-items:center;gap:12px;padding:10px;text-align:left;width:100%}
+.pi img,.pi .ph{width:68px;height:68px;border-radius:12px;object-fit:cover;background:#1a1f17;flex-shrink:0}
+.pi .t{flex:1;min-width:0}
+.pi .t b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--card2);color:var(--muted)}
+.pill.g{background:rgba(98,189,47,.18);color:var(--g2)}.pill.r{background:rgba(255,107,91,.15);color:var(--red)}.pill.y{background:rgba(245,197,66,.15);color:#f5c542}
+.ord{display:flex;flex-direction:column;gap:4px}
+.ord button{width:34px;height:30px;border-radius:9px;background:var(--card2);display:grid;place-items:center}
+.ord button svg{width:16px;height:16px}
+.banner{padding:18px;border-radius:18px;background:linear-gradient(135deg,rgba(98,189,47,.18),rgba(98,189,47,.05));border:1px solid rgba(98,189,47,.35);margin-bottom:16px}
+.banner p{margin:6px 0 12px;color:#d6ded1;font-size:.94rem}
+/* editor sheet */
+.sheet{position:fixed;inset:0;z-index:40;background:var(--bg);overflow:auto;display:none;animation:up .25s ease}
+.sheet.on{display:block}
+@keyframes up{from{transform:translateY(30px);opacity:0}}
+.sheet .top{justify-content:space-between}
+.sheet main{padding-bottom:140px}
+.addph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;padding:28px;border:2px dashed rgba(98,189,47,.45);border-radius:18px;background:rgba(98,189,47,.06);color:var(--g2);font-weight:700;font-size:1.05rem}
+.addph svg{width:34px;height:34px}
+.phs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+.phc{border-radius:14px;overflow:hidden;background:#151a13;border:1px solid var(--line);position:relative}
+.phc img{width:100%;aspect-ratio:1;object-fit:cover}
+.phc .cv{position:absolute;top:8px;left:8px}
+.phc .ctl{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.phc .ctl button{background:#11160f;padding:9px 0;font-size:.74rem;font-weight:700;display:grid;place-items:center;color:var(--muted)}
+.phc .ctl button.on{color:#0a1405;background:var(--g)}
+.phc .ctl button svg{width:17px;height:17px}
+.phc .ctl button.del{color:var(--red)}
+.tg{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;margin-top:18px}
+.sw{position:relative;width:52px;height:30px;flex-shrink:0}
+.sw input{opacity:0;width:0;height:0}
+.sw span{position:absolute;inset:0;border-radius:99px;background:#2a3127;transition:.2s}
+.sw span::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+span{background:var(--g)}.sw input:checked+span::after{transform:translateX(22px)}
+.savebar{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:12px 16px max(12px,env(safe-area-inset-bottom));background:rgba(7,9,6,.92);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;gap:10px;justify-content:center}
+.savebar .btn{flex:1;max-width:360px}
+/* inquiries */
+.iq{padding:16px;margin-bottom:10px}
+.iq .h{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.iq .msg{white-space:pre-wrap;margin-top:10px;color:#d6ded1}
+.iq .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.iq .acts .btn{padding:10px 14px;font-size:.9rem}
+.iq.new{border-color:rgba(98,189,47,.5)}
+/* content editor */
+details.sec{margin-bottom:10px}
+details.sec>summary{list-style:none;padding:16px 18px;font-weight:700;display:flex;justify-content:space-between;cursor:pointer}
+details.sec>summary::-webkit-details-marker{display:none}
+details.sec>summary::after{content:"›";transform:rotate(90deg);color:var(--g2);font-size:1.3rem;line-height:1}
+details.sec[open]>summary::after{transform:rotate(-90deg)}
+details.sec .in{padding:0 18px 18px}
+.li{border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:10px;background:rgba(0,0,0,.2)}
+.li .bar{display:flex;gap:6px;justify-content:flex-end;margin-bottom:-4px}
+.li .bar button{width:34px;height:34px;border-radius:9px;background:var(--card2);display:grid;place-items:center}
+.li .bar button svg{width:16px;height:16px}
+.icsel{display:flex;flex-wrap:wrap;gap:6px}
+.icsel button{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.icsel button.on{border-color:var(--g);color:var(--g2);background:rgba(98,189,47,.12)}
+.list-menu .card{display:flex;align-items:center;gap:14px;padding:16px;margin-bottom:10px;text-decoration:none;width:100%;text-align:left}
+.list-menu .card .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(98,189,47,.13);color:var(--g2)}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);opacity:0;transition:.25s;z-index:100;background:#1d2619;border:1px solid rgba(98,189,47,.4);padding:12px 18px;border-radius:14px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.busy{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center;padding:24px}
+.busy.on{display:flex}
+.spin{width:44px;height:44px;border-radius:50%;border:4px solid rgba(255,255,255,.15);border-top-color:var(--g);animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+code{background:rgba(0,0,0,.4);padding:2px 6px;border-radius:6px;font-size:.85em;word-break:break-all}
+.empty{text-align:center;padding:40px 16px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- Opsætning mangler -->
+<section class="screen" id="sSetup"><div class="center"><div class="box">
+  <img class="logo" src="assets/img/logo.webp" alt="HolmQ">
+  <h1>Admin er ikke sat op endnu</h1>
+  <p class="muted">Hjemmesiden kører fint med standardindholdet. For at kunne tilføje projekter og billeder skal der kobles en gratis Firebase-database på.</p>
+  <ol class="muted" style="margin:16px 0 0 18px;display:grid;gap:6px;font-size:.92rem">
+    <li>Opret et Firebase-projekt og slå <b>Firestore</b> + <b>Authentication (E-mail/adgangskode)</b> til.</li>
+    <li>Indsæt firebaseConfig i <code>config.js</code>.</li>
+    <li>Indsæt reglerne fra <code>firestore.rules</code>.</li>
+  </ol>
+  <p class="dim" style="margin-top:14px">Hele guiden står i README.md i repoet.</p>
+  <a class="btn btn-o btn-w" style="margin-top:18px;text-decoration:none" href="./">Til hjemmesiden</a>
+</div></div></section>
+
+<!-- Login -->
+<section class="screen" id="sLogin"><div class="center"><form class="box" id="loginForm">
+  <img class="logo" src="assets/img/logo.webp" alt="HolmQ">
+  <h1>Log ind</h1><p class="muted">Administrer projekter, billeder og henvendelser.</p>
+  <label for="lEmail">E-mail</label><input id="lEmail" type="email" autocomplete="username" required>
+  <label for="lPass">Adgangskode</label><input id="lPass" type="password" autocomplete="current-password" required>
+  <button class="btn btn-g btn-w" style="margin-top:20px" type="submit">Log ind</button>
+  <button class="btn btn-w dim" style="margin-top:6px" type="button" id="forgot">Glemt adgangskode?</button>
+  <p class="err" id="lErr"></p>
+</form></div></section>
+
+<!-- Ikke admin -->
+<section class="screen" id="sNoAccess"><div class="center"><div class="box">
+  <img class="logo" src="assets/img/logo.webp" alt="HolmQ">
+  <h1>Næsten der!</h1>
+  <p class="muted">Du er logget ind, men kontoen er ikke godkendt som administrator endnu. Send dette ID til den, der har sat siden op:</p>
+  <p style="margin:14px 0"><code id="myUid"></code></p>
+  <button class="btn btn-o btn-w" id="copyUid">Kopiér ID</button>
+  <button class="btn btn-w dim" style="margin-top:8px" data-logout>Log ud</button>
+</div></div></section>
+
+<!-- App -->
+<section class="screen" id="sApp">
+  <div class="top"><img src="assets/img/logo.webp" alt="HolmQ"><div class="sp"></div><a href="./" target="_blank" rel="noopener"><span data-ic="eye"></span>Se siden</a></div>
+  <main>
+    <!-- Projekter -->
+    <div class="view on" id="vProjects">
+      <div class="vh"><h2>Projekter</h2><button class="btn btn-g" id="newProject"><span data-ic="plus"></span>Nyt projekt</button></div>
+      <div class="banner" id="importBanner" hidden><b>Kom hurtigt i gang</b><p>Hent de 7 startprojekter med billeder fra Facebook ind i admin, så du kan redigere dem.</p><button class="btn btn-g" data-import>Importér startprojekter</button></div>
+      <div class="plist" id="plist"></div>
+    </div>
+    <!-- Henvendelser -->
+    <div class="view" id="vInq">
+      <div class="vh"><h2>Henvendelser</h2><select id="inqFilter" style="width:auto"><option value="open">Åbne</option><option value="all">Alle</option><option value="done">Afsluttede</option></select></div>
+      <div id="inqList"></div>
+    </div>
+    <!-- Indhold -->
+    <div class="view" id="vContent">
+      <div class="vh"><h2>Tekster &amp; indhold</h2></div>
+      <form id="cForm"></form>
+    </div>
+    <!-- Mere -->
+    <div class="view" id="vMore">
+      <div class="vh"><h2>Mere</h2></div>
+      <div class="list-menu">
+        <a class="card" href="./" target="_blank" rel="noopener"><span class="ic" data-ic="eye"></span><div><b>Se hjemmesiden</b><div class="dim">Åbner siden i en ny fane</div></div></a>
+        <button class="card" data-import><span class="ic" data-ic="images"></span><div><b>Importér startprojekter</b><div class="dim">Henter de oprindelige projekter ind igen</div></div></button>
+        <div class="card"><span class="ic" data-ic="phone"></span><div><b>Brug admin som app</b><div class="dim">iPhone: Del → "Føj til hjemmeskærm". Android: ⋮ → "Installer app" / "Føj til startskærm".</div></div></div>
+        <button class="card" data-logout><span class="ic" data-ic="logout"></span><div><b>Log ud</b><div class="dim" id="whoami"></div></div></button>
+      </div>
+    </div>
+  </main>
+  <nav class="tabs">
+    <button class="on" data-v="vProjects"><span data-ic="images"></span>Projekter</button>
+    <button data-v="vInq"><span data-ic="inbox"></span>Henvendelser<span class="dot" id="inqDot" hidden></span></button>
+    <button data-v="vContent"><span data-ic="doc"></span>Indhold</button>
+    <button data-v="vMore"><span data-ic="more"></span>Mere</button>
+  </nav>
+</section>
+
+<!-- Projekt-editor -->
+<div class="sheet" id="editor">
+  <div class="top"><button class="btn btn-o" id="edClose"><span data-ic="left"></span>Tilbage</button><b id="edTitle">Nyt projekt</b><span style="width:80px"></span></div>
+  <main>
+    <label style="margin-top:0">Billeder</label>
+    <button class="addph" id="addPh" type="button"><span data-ic="camera"></span>Tilføj billeder<span class="dim" style="font-weight:500">Tag et billede eller vælg fra telefonen</span></button>
+    <input type="file" id="phInput" accept="image/*" multiple hidden>
+    <p class="dim" style="margin-top:10px">Første billede er forsidebillede. Markér et <b>Før</b>- og et <b>Efter</b>-billede for at få en sammenligning.</p>
+    <div class="phs" id="phs"></div>
+    <label for="eTitle">Titel *</label><input id="eTitle" maxlength="120" placeholder="Fx Ny græsplæne i Hirtshals">
+    <label for="eCat">Kategori</label><input id="eCat" list="catList" maxlength="60" placeholder="Vælg eller skriv selv"><datalist id="catList"></datalist>
+    <label for="eLoc">Sted (valgfrit)</label><input id="eLoc" maxlength="80" placeholder="Fx Hirtshals">
+    <label for="eDate">Dato (valgfrit)</label><input id="eDate" maxlength="40" placeholder="Fx september 2026">
+    <label for="eDesc">Beskrivelse</label><textarea id="eDesc" maxlength="2000" placeholder="Hvad blev der lavet? Kort og konkret."></textarea>
+    <div class="card tg"><div><b>Vis på hjemmesiden</b><div class="dim">Slå fra for at gemme som kladde</div></div><label class="sw"><input type="checkbox" id="ePub" checked><span></span></label></div>
+    <button class="btn btn-r btn-w" style="margin-top:28px" id="edDelete">Slet projekt</button>
+  </main>
+  <div class="savebar"><button class="btn btn-g" id="edSave"><span data-ic="check"></span>Gem projekt</button></div>
+</div>
+
+<div class="busy" id="busy"><div class="spin"></div><b id="busyTxt">Gemmer…</b></div>
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="content.js"></script>
+<script type="module">
+import { ICONS, ICON_KEYS, esc, fmtPhone, telHref, getFirebase } from "./assets/shared.js";
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const P = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+Object.assign(ICONS, {
+  plus: P('<path d="M12 5v14M5 12h14"/>'), camera: P('<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/>'),
+  trash: P('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>'), eye: P('<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'),
+  inbox: P('<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>'),
+  more: P('<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>'),
+  logout: P('<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>'),
+  up: P('<path d="m18 15-6-6-6 6"/>'), down: P('<path d="m6 9 6 6 6-6"/>')
+});
+const icons = (r = document) => $$("[data-ic]", r).forEach((e) => { if (!e.firstElementChild) e.innerHTML = ICONS[e.dataset.ic] || ""; });
+icons();
+const toast = (t) => { const e = $("#toast"); e.textContent = t; e.classList.add("on"); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove("on"), 2600); };
+const busy = (t) => { $("#busy").classList.toggle("on", !!t); if (t) $("#busyTxt").textContent = t; };
+const show = (id) => $$(".screen").forEach((s) => s.classList.toggle("on", s.id === id));
+
+const fb = await getFirebase(true).catch((e) => { console.error(e); return null; });
+if (!fb) { show("sSetup"); throw new Error("Firebase ikke konfigureret"); }
+const { fs, db, au, auth } = fb;
+const D = window.HOLMQ_DEFAULTS;
+let PROJECTS = [], CONTENT = structuredClone(D.content), unsub = [];
+
+/* ---------- Auth ---------- */
+$("#loginForm").onsubmit = async (e) => {
+  e.preventDefault(); $("#lErr").textContent = "";
+  try { await au.signInWithEmailAndPassword(auth, $("#lEmail").value.trim(), $("#lPass").value); }
+  catch (x) { $("#lErr").textContent = /invalid|wrong|user-not-found/.test(x.code) ? "Forkert e-mail eller adgangskode." : "Kunne ikke logge ind (" + x.code + ")"; }
+};
+$("#forgot").onclick = async () => {
+  const em = $("#lEmail").value.trim(); if (!em) return ($("#lErr").textContent = "Skriv din e-mail først.");
+  try { await au.sendPasswordResetEmail(auth, em); $("#lErr").textContent = ""; toast("Vi har sendt et link til " + em); } catch (x) { $("#lErr").textContent = "Kunne ikke sende link."; }
+};
+$$("[data-logout]").forEach((b) => (b.onclick = () => au.signOut(auth)));
+$("#copyUid").onclick = () => { navigator.clipboard?.writeText($("#myUid").textContent); toast("ID kopieret"); };
+
+au.onAuthStateChanged(auth, async (user) => {
+  unsub.forEach((u) => u()); unsub = [];
+  if (!user) return show("sLogin");
+  const adm = await fs.getDoc(fs.doc(db, "admins", user.uid)).catch(() => null);
+  if (!adm?.exists()) { $("#myUid").textContent = user.uid; return show("sNoAccess"); }
+  $("#whoami").textContent = user.email;
+  show("sApp"); start();
+});
+
+/* ---------- Tabs ---------- */
+$$(".tabs button").forEach((b) => (b.onclick = () => {
+  $$(".tabs button").forEach((x) => x.classList.toggle("on", x === b));
+  $$(".view").forEach((v) => v.classList.toggle("on", v.id === b.dataset.v)); scrollTo(0, 0);
+}));
+
+function start() {
+  unsub.push(fs.onSnapshot(fs.collection(db, "projects"), (s) => {
+    PROJECTS = s.docs.map((d) => ({ id: d.id, ...d.data() })).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    renderProjects();
+  }));
+  unsub.push(fs.onSnapshot(fs.query(fs.collection(db, "inquiries"), fs.orderBy("createdAt", "desc")), (s) => {
+    INQ = s.docs.map((d) => ({ id: d.id, ...d.data() })); renderInq();
+  }));
+  fs.getDoc(fs.doc(db, "site", "content")).then((s) => { if (s.exists()) Object.assign(CONTENT, s.data()); renderContent(); });
+}
+
+/* ---------- Projekter ---------- */
+function renderProjects() {
+  $("#importBanner").hidden = PROJECTS.length > 0;
+  $("#plist").innerHTML = PROJECTS.length ? PROJECTS.map((p, i) => `
+    <div class="card pi">
+      <button style="display:flex;gap:12px;align-items:center;flex:1;min-width:0;text-align:left" data-edit="${p.id}">
+        ${p.photos?.[0] ? `<img src="${p.photos[0].thumb}" alt="">` : `<div class="ph"></div>`}
+        <div class="t"><b>${esc(p.title)}</b><div class="dim">${esc(p.category || "Ingen kategori")} · ${(p.photos || []).length} billeder</div>
+        <div style="margin-top:5px">${p.published ? `<span class="pill g">Offentlig</span>` : `<span class="pill">Kladde</span>`}</div></div>
+      </button>
+      <div class="ord"><button data-mv="${i}" data-d="-1" aria-label="Flyt op" ${i ? "" : "disabled style=opacity:.3"}>${ICONS.up}</button><button data-mv="${i}" data-d="1" aria-label="Flyt ned" ${i < PROJECTS.length - 1 ? "" : "disabled style=opacity:.3"}>${ICONS.down}</button></div>
+    </div>`).join("") : `<div class="empty">Ingen projekter endnu. Tryk på <b>Nyt projekt</b> for at komme i gang.<br><span class="dim">Indtil da viser hjemmesiden startprojekterne.</span></div>`;
+}
+$("#plist").onclick = async (e) => {
+  const ed = e.target.closest("[data-edit]"); if (ed) return openEditor(PROJECTS.find((p) => p.id === ed.dataset.edit));
+  const mv = e.target.closest("[data-mv]"); if (!mv) return;
+  const i = +mv.dataset.mv, j = i + +mv.dataset.d; const a = PROJECTS[i], b = PROJECTS[j];
+  const list = PROJECTS.map((p, k) => ({ id: p.id, order: k })); list[i].order = j; list[j].order = i;
+  const batch = fs.writeBatch(db); list.forEach((x) => batch.update(fs.doc(db, "projects", x.id), { order: x.order })); await batch.commit();
+};
+
+/* ---------- Billedkomprimering ---------- */
+async function loadBitmap(src) {
+  try { return await createImageBitmap(src, { imageOrientation: "from-image" }); }
+  catch { return await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src instanceof Blob ? URL.createObjectURL(src) : src; }); }
+}
+const webp = (() => { const c = document.createElement("canvas"); c.width = c.height = 1; return c.toDataURL("image/webp").startsWith("data:image/webp"); })();
+function toDataUrl(bmp, max, q, limit) {
+  const s = Math.min(1, max / Math.max(bmp.width, bmp.height));
+  const c = document.createElement("canvas"); c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+  c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+  const type = webp ? "image/webp" : "image/jpeg"; let url = c.toDataURL(type, q);
+  while (url.length > limit && q > 0.35) { q -= 0.1; url = c.toDataURL(type, q); }
+  if (url.length > limit) return toDataUrl(bmp, max * 0.75, 0.7, limit);
+  return { url, w: c.width, h: c.height };
+}
+async function compress(file) {
+  const bmp = await loadBitmap(file);
+  return { full: toDataUrl(bmp, 1800, 0.82, 900000), thumb: toDataUrl(bmp, 560, 0.7, 45000).url };
+}
+
+/* ---------- Editor ---------- */
+let ED = null; // { id, photos:[{id?,thumb,tag,full?}], removed:[] }
+function openEditor(p) {
+  ED = p ? { id: p.id, photos: (p.photos || []).map((x) => ({ ...x })), removed: [], order: p.order } : { id: null, photos: [], removed: [] };
+  $("#edTitle").textContent = p ? "Redigér projekt" : "Nyt projekt";
+  $("#eTitle").value = p?.title || ""; $("#eCat").value = p?.category || ""; $("#eLoc").value = p?.location || "";
+  $("#eDate").value = p?.date || ""; $("#eDesc").value = p?.description || ""; $("#ePub").checked = p ? !!p.published : true;
+  $("#edDelete").hidden = !p;
+  $("#catList").innerHTML = [...new Set([...(CONTENT.services || []).map((s) => s.title), ...PROJECTS.map((x) => x.category).filter(Boolean)])].map((c) => `<option value="${esc(c)}">`).join("");
+  renderPhotos(); $("#editor").classList.add("on"); $("#editor").scrollTop = 0; document.body.style.overflow = "hidden";
+}
+const closeEditor = () => { $("#editor").classList.remove("on"); document.body.style.overflow = ""; ED = null; };
+$("#edClose").onclick = closeEditor;
+$("#newProject").onclick = () => openEditor(null);
+$("#addPh").onclick = () => $("#phInput").click();
+$("#phInput").onchange = async (e) => {
+  const files = [...e.target.files]; e.target.value = "";
+  const room = 16 - ED.photos.length;
+  if (files.length > room) toast(`Max 16 billeder pr. projekt – ${Math.max(0, room)} tilføjet`);
+  for (const [i, f] of files.slice(0, room).entries()) {
+    busy(`Forbereder billede ${i + 1} af ${Math.min(files.length, room)}…`);
+    try { const c = await compress(f); ED.photos.push({ thumb: c.thumb, full: c.full, tag: null }); }
+    catch (x) { console.error(x); toast("Et billede kunne ikke læses"); }
+  }
+  busy(); renderPhotos();
+};
+function renderPhotos() {
+  $("#phs").innerHTML = ED.photos.map((p, i) => `<div class="phc"><img src="${p.thumb}" alt="">${i === 0 ? `<span class="pill g cv">Forside</span>` : ""}
+    <div class="ctl"><button data-a="tag" data-t="before" data-i="${i}" class="${p.tag === "before" ? "on" : ""}">Før</button><button data-a="tag" data-t="after" data-i="${i}" class="${p.tag === "after" ? "on" : ""}">Efter</button>
+    <button data-a="first" data-i="${i}" aria-label="Gør til forside">${ICONS.star}</button><button data-a="del" data-i="${i}" class="del" aria-label="Slet billede">${ICONS.trash}</button></div></div>`).join("");
+}
+$("#phs").onclick = (e) => {
+  const b = e.target.closest("button[data-a]"); if (!b) return; const i = +b.dataset.i, ph = ED.photos[i];
+  if (b.dataset.a === "tag") { const t = b.dataset.t; const on = ph.tag === t; ED.photos.forEach((x) => { if (x.tag === t) x.tag = null; }); ph.tag = on ? null : t; }
+  if (b.dataset.a === "first") { ED.photos.splice(i, 1); ED.photos.unshift(ph); }
+  if (b.dataset.a === "del") { if (!confirm("Slet billedet?")) return; ED.photos.splice(i, 1); if (ph.id) ED.removed.push(ph.id); }
+  renderPhotos();
+};
+$("#edSave").onclick = async () => {
+  const title = $("#eTitle").value.trim();
+  if (!title) { $("#eTitle").focus(); return toast("Giv projektet en titel"); }
+  if (!ED.photos.length && !confirm("Projektet har ingen billeder. Gem alligevel?")) return;
+  try {
+    const news = ED.photos.filter((p) => !p.id);
+    for (const [k, p] of news.entries()) {
+      busy(`Uploader billede ${k + 1} af ${news.length}…`);
+      const ref = fs.doc(fs.collection(db, "images"));
+      await fs.setDoc(ref, { data: p.full.url, w: p.full.w, h: p.full.h, createdAt: fs.serverTimestamp() });
+      p.id = ref.id; delete p.full;
+    }
+    busy("Gemmer projekt…");
+    const data = { title, category: $("#eCat").value.trim(), location: $("#eLoc").value.trim(), date: $("#eDate").value.trim(),
+      description: $("#eDesc").value.trim(), published: $("#ePub").checked, photos: ED.photos.map((p) => ({ id: p.id, thumb: p.thumb, tag: p.tag || null })),
+      updatedAt: fs.serverTimestamp() };
+    if (ED.id) await fs.updateDoc(fs.doc(db, "projects", ED.id), data);
+    else await fs.addDoc(fs.collection(db, "projects"), { ...data, order: PROJECTS.length ? Math.min(...PROJECTS.map((p) => p.order ?? 0)) - 1 : 0, createdAt: fs.serverTimestamp() });
+    await Promise.all(ED.removed.map((id) => fs.deleteDoc(fs.doc(db, "images", id)).catch(() => {})));
+    busy(); closeEditor(); toast("Projektet er gemt ✓");
+  } catch (x) { console.error(x); busy(); toast("Kunne ikke gemme: " + (x.code || x.message)); }
+};
+$("#edDelete").onclick = async () => {
+  if (!ED.id || !confirm("Slet hele projektet og alle billeder? Det kan ikke fortrydes.")) return;
+  busy("Sletter…");
+  try {
+    const ids = [...ED.photos.filter((p) => p.id).map((p) => p.id), ...ED.removed];
+    await Promise.all(ids.map((id) => fs.deleteDoc(fs.doc(db, "images", id)).catch(() => {})));
+    await fs.deleteDoc(fs.doc(db, "projects", ED.id)); busy(); closeEditor(); toast("Projektet er slettet");
+  } catch (x) { busy(); toast("Kunne ikke slette"); }
+};
+
+/* ---------- Import af startprojekter ---------- */
+$$("[data-import]").forEach((b) => (b.onclick = async () => {
+  if (!confirm(`Importér ${D.projects.length} startprojekter med billeder?`)) return;
+  try {
+    let n = 0; const total = D.projects.reduce((s, p) => s + p.photos.length, 0);
+    for (const [i, p] of D.projects.entries()) {
+      const photos = [];
+      for (const ph of p.photos) {
+        busy(`Importerer billede ${++n} af ${total}…`);
+        const blob = await (await fetch(ph.src)).blob(); const c = await compress(blob);
+        const ref = fs.doc(fs.collection(db, "images"));
+        await fs.setDoc(ref, { data: c.full.url, w: c.full.w, h: c.full.h, createdAt: fs.serverTimestamp() });
+        photos.push({ id: ref.id, thumb: c.thumb, tag: ph.tag || null });
+      }
+      await fs.addDoc(fs.collection(db, "projects"), { title: p.title, category: p.category || "", location: p.location || "", date: p.date || "", description: p.description || "",
+        published: true, photos, order: PROJECTS.length + i, createdAt: fs.serverTimestamp(), updatedAt: fs.serverTimestamp() });
+    }
+    busy(); toast("Startprojekterne er importeret ✓");
+  } catch (x) { console.error(x); busy(); toast("Import fejlede: " + (x.code || x.message)); }
+}));
+
+/* ---------- Henvendelser ---------- */
+let INQ = [];
+const ST = { new: ["Ny", "g"], contacted: ["Kontaktet", "y"], done: ["Afsluttet", ""] };
+function renderInq() {
+  const n = INQ.filter((x) => x.status === "new").length;
+  $("#inqDot").hidden = !n; $("#inqDot").textContent = n;
+  const f = $("#inqFilter").value;
+  const list = INQ.filter((x) => f === "all" || (f === "done" ? x.status === "done" : x.status !== "done"));
+  $("#inqList").innerHTML = list.length ? list.map((q) => {
+    const d = q.createdAt?.toDate?.(); const st = ST[q.status] || ST.new;
+    return `<div class="card iq ${q.status === "new" ? "new" : ""}">
+      <div class="h"><div><b>${esc(q.name)}</b><div class="dim">${d ? d.toLocaleString("da-DK", { dateStyle: "medium", timeStyle: "short" }) : ""}${q.address ? " · " + esc(q.address) : ""}</div></div><span class="pill ${st[1]}">${st[0]}</span></div>
+      ${q.services?.length ? `<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${q.services.map((s) => `<span class="pill">${esc(s)}</span>`).join("")}</div>` : ""}
+      <div class="msg">${esc(q.message)}</div>
+      <div class="acts">
+        <a class="btn btn-g" href="${telHref(q.phone)}">${ICONS.phone} Ring ${esc(fmtPhone(q.phone))}</a>
+        <a class="btn btn-o" href="sms:${esc(q.phone)}">${ICONS.sms} SMS</a>
+        ${q.email ? `<a class="btn btn-o" href="mailto:${esc(q.email)}?subject=${encodeURIComponent("Vedr. din forespørgsel til HolmQ Service")}">${ICONS.mail} Mail</a>` : ""}
+      </div>
+      <div class="acts">
+        <select data-st="${q.id}" style="width:auto;flex:1">${Object.entries(ST).map(([k, v]) => `<option value="${k}" ${q.status === k ? "selected" : ""}>${v[0]}</option>`).join("")}</select>
+        <button class="btn btn-r" data-delq="${q.id}" aria-label="Slet">${ICONS.trash}</button>
+      </div></div>`;
+  }).join("") : `<div class="empty">Ingen henvendelser her endnu.<br><span class="dim">Når nogen udfylder kontaktformularen, dukker de op her.</span></div>`;
+}
+$("#inqFilter").onchange = renderInq;
+$("#inqList").onchange = (e) => { const s = e.target.closest("[data-st]"); if (s) fs.updateDoc(fs.doc(db, "inquiries", s.dataset.st), { status: s.value }).then(() => toast("Status opdateret")); };
+$("#inqList").onclick = (e) => { const b = e.target.closest("[data-delq]"); if (b && confirm("Slet henvendelsen?")) fs.deleteDoc(fs.doc(db, "inquiries", b.dataset.delq)).then(() => toast("Slettet")); };
+
+/* ---------- Indhold ---------- */
+const F = (k, label, opts = {}) => `<label for="c_${k}">${label}</label>${opts.area ? `<textarea id="c_${k}" data-k="${k}" ${opts.rows ? `rows="${opts.rows}"` : ""}>${esc(CONTENT[k])}</textarea>` : `<input id="c_${k}" data-k="${k}" value="${esc(CONTENT[k])}" ${opts.type ? `type="${opts.type}"` : ""} ${opts.ph ? `placeholder="${esc(opts.ph)}"` : ""}>`}${opts.help ? `<p class="dim" style="margin-top:6px">${opts.help}</p>` : ""}`;
+const LISTS = {
+  services: { label: "ydelse", fields: [["title", "Titel"], ["text", "Tekst", true], ["badge", "Mærkat (valgfrit, fx Nyhed)"]], icon: true, blank: { icon: "leaf", title: "", text: "", badge: "" } },
+  faq: { label: "spørgsmål", fields: [["q", "Spørgsmål"], ["a", "Svar", true]], blank: { q: "", a: "" } },
+  reviews: { label: "anmeldelse", fields: [["name", "Navn"], ["text", "Anmeldelse", true], ["stars", "Stjerner (1-5)"]], blank: { name: "", text: "", stars: 5 } }
+};
+function listHTML(key) {
+  const L = LISTS[key];
+  return (CONTENT[key] || []).map((it, i) => `<div class="li" data-list="${key}" data-i="${i}">
+    <div class="bar"><button type="button" data-lm="-1" aria-label="Op">${ICONS.up}</button><button type="button" data-lm="1" aria-label="Ned">${ICONS.down}</button><button type="button" data-ld style="color:var(--red)" aria-label="Fjern">${ICONS.trash}</button></div>
+    ${L.icon ? `<label>Ikon</label><div class="icsel">${ICON_KEYS.map((k) => `<button type="button" data-ico="${k}" class="${it.icon === k ? "on" : ""}">${ICONS[k]}</button>`).join("")}</div>` : ""}
+    ${L.fields.map(([f, lab, area]) => `<label>${lab}</label>${area ? `<textarea data-f="${f}" rows="3">${esc(it[f])}</textarea>` : `<input data-f="${f}" value="${esc(it[f] ?? "")}">`}`).join("")}
+  </div>`).join("") + `<button type="button" class="btn btn-o btn-w" style="margin-top:10px" data-ladd="${key}">${ICONS.plus} Tilføj ${L.label}</button>`;
+}
+function renderContent() {
+  const sec = (t, body, open) => `<details class="card sec" ${open ? "open" : ""}><summary>${t}</summary><div class="in">${body}</div></details>`;
+  $("#cForm").innerHTML =
+    sec("Forside", F("heroTitle", "Overskrift") + F("heroText", "Tekst under overskriften", { area: true }) + F("tagline", "Lille linje over overskriften") + F("promise", "Løfte / slogan"), true) +
+    sec("Kontaktoplysninger", F("phone", "Telefon", { type: "tel" }) + F("email", "E-mail (vises på siden)", { type: "email" }) +
+      F("formEmail", "E-mail der modtager henvendelser", { type: "email", help: "Henvendelser gemmes altid her i admin. Skriv en e-mail her, hvis de også skal sendes som mail (første gang skal du bekræfte via et link fra FormSubmit)." }) +
+      F("facebook", "Facebook-side (link)", { ph: "https://www.facebook.com/..." }) + F("hours", "Tilgængelighed") + F("city", "By") + F("zip", "Postnr.") + F("cvr", "CVR-nr.") + F("company", "Firmanavn")) +
+    sec("Om mig", F("aboutTitle", "Overskrift") + F("aboutText", "Tekst", { area: true, rows: 8 })) +
+    sec("Område", F("areaText", "Tekst", { area: true }) + `<label for="c_areas">Byer (adskil med komma)</label><input id="c_areas" data-areas value="${esc((CONTENT.areas || []).join(", "))}">`) +
+    sec("Ydelser", listHTML("services")) + sec("Ofte stillede spørgsmål", listHTML("faq")) +
+    sec("Anmeldelser", `<p class="dim">Kopiér gerne anmeldelser fra Facebook ind her (med kundens accept). Sektionen vises først, når der er mindst én.</p>` + listHTML("reviews")) +
+    `<div class="savebar" style="position:sticky;margin:20px -16px 0;bottom:70px;border-radius:0"><button type="submit" class="btn btn-g">${ICONS.check} Gem tekster</button></div>`;
+}
+function readForm() {
+  $$("#cForm [data-k]").forEach((e) => (CONTENT[e.dataset.k] = e.value.trim()));
+  CONTENT.areas = $("#cForm [data-areas]").value.split(",").map((s) => s.trim()).filter(Boolean);
+  for (const key of Object.keys(LISTS)) CONTENT[key] = $$(`#cForm .li[data-list="${key}"]`).map((li) => {
+    const o = {}; $$("[data-f]", li).forEach((e) => (o[e.dataset.f] = e.value.trim()));
+    const ic = $(".icsel .on", li); if (ic) o.icon = ic.dataset.ico; if (key === "reviews") o.stars = Math.max(1, Math.min(5, parseInt(o.stars) || 5)); return o;
+  });
+}
+$("#cForm").onclick = (e) => {
+  const ico = e.target.closest("[data-ico]"); if (ico) { $$("[data-ico]", ico.parentElement).forEach((b) => b.classList.toggle("on", b === ico)); return; }
+  const add = e.target.closest("[data-ladd]"), mv = e.target.closest("[data-lm]"), del = e.target.closest("[data-ld]");
+  if (!add && !mv && !del) return;
+  const openIdx = $$("#cForm details").map((d) => d.open);
+  readForm();
+  if (add) CONTENT[add.dataset.ladd].push(structuredClone(LISTS[add.dataset.ladd].blank));
+  else { const li = e.target.closest(".li"), arr = CONTENT[li.dataset.list], i = +li.dataset.i;
+    if (del) arr.splice(i, 1); else { const j = i + +mv.dataset.lm; if (j >= 0 && j < arr.length) [arr[i], arr[j]] = [arr[j], arr[i]]; } }
+  renderContent(); $$("#cForm details").forEach((d, k) => (d.open = openIdx[k]));
+};
+$("#cForm").onsubmit = async (e) => {
+  e.preventDefault(); readForm(); busy("Gemmer…");
+  try { await fs.setDoc(fs.doc(db, "site", "content"), { ...CONTENT, updatedAt: fs.serverTimestamp() }); busy(); toast("Teksterne er gemt ✓"); }
+  catch (x) { busy(); toast("Kunne ikke gemme: " + (x.code || x.message)); }
+};
+</script>
+</body>
+</html>
